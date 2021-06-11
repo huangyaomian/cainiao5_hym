@@ -7,19 +7,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * 作者： 志威  zhiwei.org
- * 主页： Github: https://github.com/zhiwei1990
+ * 作者： mika
+ * 主页：
  * 日期： 2021年06月10日 8:14 上午
- * 签名： 天行健，君子以自强不息；地势坤，君子以厚德载物。
- *      _              _           _     _   ____  _             _ _
- *     / \   _ __   __| |_ __ ___ (_) __| | / ___|| |_ _   _  __| (_) ___
- *    / _ \ | '_ \ / _` | '__/ _ \| |/ _` | \___ \| __| | | |/ _` | |/ _ \
- *   / ___ \| | | | (_| | | | (_) | | (_| |  ___) | |_| |_| | (_| | | (_) |
- *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/  -- 志威 zhiwei.org
- *
- * You never know what you can do until you try !
- * ----------------------------------------------------------------
- * 用户记录okhttp的网络日志的拦截器
  */
 class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : Interceptor {
 
@@ -93,11 +83,17 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
     }
 
 
+    /**
+     * 打印全部日志
+     */
     private fun logBodyReq(sb: StringBuilder, request: Request, connection: Connection) {
         logHeadersReq(sb, request, connection)
         sb.appendLine("RequestBody: ${request.body.toString()}")
     }
 
+    /**
+     * 打印请求头的日志
+     */
     private fun logHeadersReq(sb: StringBuilder, request: Request, connection: Connection) {
         logBasicReq(sb, request, connection)
         val headerStr = request.headers.joinToString("") { header ->
@@ -106,6 +102,9 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
         sb.appendLine(headerStr)
     }
 
+    /**
+     * 打印请求基础日志
+     */
     private fun logBasicReq(sb: StringBuilder, request: Request, connection: Connection) {
         sb.appendLine(
             "请求 method: ${request.method} url: ${decodeUrlStr(request.url.toString())} tag: ${request.tag()} protocol: ${connection.protocol() ?: okhttp3.Protocol.HTTP_1_1}"
@@ -146,6 +145,9 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
         logIt(sb,ColorLevel.INFO)
     }
 
+    /**
+     * 打印响应头的日志
+     */
     private fun logHeadersRep(sb: StringBuilder, response: Response) {
         logBasicRep(sb,response)
         val headerStr:String = response.headers.joinToString {
@@ -154,6 +156,9 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
         sb.appendLine(headerStr)
     }
 
+    /**
+     * 打印基础信息日志
+     */
     private fun logBasicRep(sb: StringBuilder, response: Response) {
         sb.appendLine("响应 protocol：${response.protocol} code:${response.cacheControl} message:${response.message}")
             .appendLine("响应 request Url:${decodeUrlStr(response.request.url.toString())}")
