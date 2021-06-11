@@ -1,0 +1,9 @@
+rootProject.name = "cainiao5_hym"
+include ':app'
+include ':common'
+include ':course'
+include ':home'
+include ':login'
+include ':mine'
+include ':study'
+include ':netdemo'

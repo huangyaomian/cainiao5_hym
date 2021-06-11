@@ -1,0 +1,11 @@
+apply plugin: 'com.android.library'
+
+apply from: '../dependencies.gradle'
+
+android {
+    // from dependencies.gradle
+}
+
+dependencies {
+    // from dependencies.gradle
+}
