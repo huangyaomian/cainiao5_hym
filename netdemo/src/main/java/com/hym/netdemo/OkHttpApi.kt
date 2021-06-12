@@ -3,6 +3,11 @@ package com.hym.netdemo
 
 import androidx.collection.SimpleArrayMap
 import com.google.gson.Gson
+import com.hym.netdemo.config.HeaderInterceptor
+import com.hym.netdemo.config.KtHttpLogInterceptor
+import com.hym.netdemo.config.LocalCookieJar
+import com.hym.netdemo.config.RetryInterceptor
+import com.hym.netdemo.support.IHttpCallback
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -47,6 +52,7 @@ class OkHttpApi : HttpApi{
         .followRedirects(false)//重定向
         .cache(Cache(File("sdcard/cache","okhttp"),1024))
         .cookieJar(LocalCookieJar())
+        .addNetworkInterceptor(HeaderInterceptor())//公共的header 拦截器
         .addNetworkInterceptor(KtHttpLogInterceptor{
             logLevel(KtHttpLogInterceptor.LogLevel.BODY)
         })//添加网络拦截器，可以对okHttp的网络请求做拦截处理，不同于应用拦截器，这里能感知所有网络状态，比如重定向
@@ -58,7 +64,8 @@ class OkHttpApi : HttpApi{
      * 异步的get请求
      */
     override fun get(params: Map<String, Any>, path: String, callback: IHttpCallback) {
-        val url = "$baseUrl$path"
+//        val url = "$baseUrl$path"
+        val url = path
         val urlBuilder = url.toHttpUrl().newBuilder()
         for (param in params) {
             urlBuilder.addQueryParameter(param.key,param.value.toString())
@@ -96,7 +103,7 @@ class OkHttpApi : HttpApi{
         val url = "$baseUrl$path"
         val request = Request.Builder()
             .post(Gson().toJson(body).toRequestBody())
-            .url("https://testapi.cniao5.com/accounts/login")
+            .url(path)
             .tag(body)
             .build()
         val newCall = mClient.newCall(request)

@@ -1,6 +1,7 @@
-package com.hym.netdemo
+package com.hym.netdemo.config
 
 import android.util.Log
+import com.hym.netdemo.support.HymUtils
 import okhttp3.*
 import java.net.URLDecoder
 import java.text.SimpleDateFormat
@@ -88,7 +89,9 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
      */
     private fun logBodyReq(sb: StringBuilder, request: Request, connection: Connection) {
         logHeadersReq(sb, request, connection)
-        sb.appendLine("RequestBody: ${request.body.toString()}")
+//        LogUtils.d("mika test ${request.body.toString()}")
+//        LogUtils.d("mika test2 ${request}")
+        sb.appendLine("请求 RequestBody:${request.body.toString()}")
     }
 
     /**
@@ -134,7 +137,7 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
                 kotlin.runCatching {
                     //peek类似于clone数据流，监视，窥探，不能直接用原来的body的string流数据作为日志，会消费掉io，所有这里是peek，监测
                     val peekBody:ResponseBody = response.peekBody(1024 * 1024)
-                    sb.appendLine(peekBody.string())
+                    sb.appendLine(HymUtils.unicodeDecode(peekBody.string()))
                 }.getOrNull()
             }
 
@@ -142,7 +145,7 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
 
         sb.appendLine("->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->")
 
-        logIt(sb,ColorLevel.INFO)
+        logIt(sb, ColorLevel.INFO)
     }
 
     /**

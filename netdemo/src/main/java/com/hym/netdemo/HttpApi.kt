@@ -1,5 +1,7 @@
 package com.hym.netdemo
 
+import com.hym.netdemo.support.IHttpCallback
+
 /**
  * 作者： 志威  zhiwei.org
  * 主页： Github: https://github.com/zhiwei1990
