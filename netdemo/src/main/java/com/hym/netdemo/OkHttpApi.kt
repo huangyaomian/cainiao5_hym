@@ -8,57 +8,68 @@ import com.hym.netdemo.config.KtHttpLogInterceptor
 import com.hym.netdemo.config.LocalCookieJar
 import com.hym.netdemo.config.RetryInterceptor
 import com.hym.netdemo.support.IHttpCallback
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 /**
- * 作者： 志威  zhiwei.org
- * 主页： Github: https://github.com/zhiwei1990
+ * 作者： huangyaomian
  * 日期： 2021年06月09日 9:41 下午
- * 签名： 天行健，君子以自强不息；地势坤，君子以厚德载物。
- *      _              _           _     _   ____  _             _ _
- *     / \   _ __   __| |_ __ ___ (_) __| | / ___|| |_ _   _  __| (_) ___
- *    / _ \ | '_ \ / _` | '__/ _ \| |/ _` | \___ \| __| | | |/ _` | |/ _ \
- *   / ___ \| | | | (_| | | | (_) | | (_| |  ___) | |_| |_| | (_| | | (_) |
- *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/  -- 志威 zhiwei.org
- *
- * You never know what you can do until you try !
- * ----------------------------------------------------------------
  */
-class OkHttpApi : HttpApi{
-    companion object{
-        private const val TAG = "OkHttpApi"//tag
-    }
+class OkHttpApi private constructor() : HttpApi {
 
     private val baseUrl = "http://api.qingyunke.com"
 
     //最大重连次数
-    var maxRetry : Int = 0
+    var maxRetry: Int = 0
 
     //存储请求，用于取消
-    private val callMap = SimpleArrayMap<Any,Call>()
+    private val callMap = SimpleArrayMap<Any, Call>()
 
     //okHttpClient
-    private val mClient = OkHttpClient.Builder()
+    private val defaultClient = OkHttpClient.Builder()
         .callTimeout(10, TimeUnit.SECONDS)//完整请求超时时长，从发起到接收返回的数据，默认值为0，不限定
-        .connectTimeout(10,TimeUnit.SECONDS)//与服务器建立连接的时长，默认10s
-        .readTimeout(10,TimeUnit.SECONDS)//读取服务器返回数据的时长
-        .writeTimeout(10,TimeUnit.SECONDS)//向服务器写入数据的时长，默认10s
-        .retryOnConnectionFailure(true )//重连
+        .connectTimeout(10, TimeUnit.SECONDS)//与服务器建立连接的时长，默认10s
+        .readTimeout(10, TimeUnit.SECONDS)//读取服务器返回数据的时长
+        .writeTimeout(10, TimeUnit.SECONDS)//向服务器写入数据的时长，默认10s
+        .retryOnConnectionFailure(true)//重连
         .followRedirects(false)//重定向
-        .cache(Cache(File("sdcard/cache","okhttp"),1024))
+        .cache(Cache(File("sdcard/cache", "okhttp"), 1024))
         .cookieJar(LocalCookieJar())
         .addNetworkInterceptor(HeaderInterceptor())//公共的header 拦截器
-        .addNetworkInterceptor(KtHttpLogInterceptor{
+        .addNetworkInterceptor(KtHttpLogInterceptor {
             logLevel(KtHttpLogInterceptor.LogLevel.BODY)
         })//添加网络拦截器，可以对okHttp的网络请求做拦截处理，不同于应用拦截器，这里能感知所有网络状态，比如重定向
         .addNetworkInterceptor(RetryInterceptor(maxRetry))
         .build()
 
+    private var mClient = defaultClient
+
+    fun getClient() = mClient
+
+    /**
+     * 配置自定义的client
+     */
+    fun initConfig(client: OkHttpClient) {
+        this.mClient = client
+    }
+
+    companion object {
+        @Volatile
+        private var api: OkHttpApi? = null
+
+        @Synchronized
+        fun getInstance(): OkHttpApi {
+            return api ?: OkHttpApi().also { api = it }
+        }
+    }
 
     /**
      * 异步的get请求
@@ -68,7 +79,7 @@ class OkHttpApi : HttpApi{
         val url = path
         val urlBuilder = url.toHttpUrl().newBuilder()
         for (param in params) {
-            urlBuilder.addQueryParameter(param.key,param.value.toString())
+            urlBuilder.addQueryParameter(param.key, param.value.toString())
         }
         val request = Request.Builder()
             .get()
@@ -77,8 +88,8 @@ class OkHttpApi : HttpApi{
             .cacheControl(CacheControl.FORCE_NETWORK)
             .build()
         val newCall = mClient.newCall(request)
-        callMap.put(request.tag(),newCall)
-        newCall.enqueue(object:Callback{
+        callMap.put(request.tag(), newCall)
+        newCall.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.message?.let { callback.onFailed(it) }
             }
@@ -107,8 +118,8 @@ class OkHttpApi : HttpApi{
             .tag(body)
             .build()
         val newCall = mClient.newCall(request)
-        callMap.put(request.tag(),newCall)
-        newCall.enqueue(object:Callback{
+        callMap.put(request.tag(), newCall)
+        newCall.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 callback.onFailed(e.message)
             }
@@ -138,8 +149,60 @@ class OkHttpApi : HttpApi{
      * 取消所有请求
      */
     override fun cancelAllRequest() {
-        for (i in 0 until callMap.size()){
+        for (i in 0 until callMap.size()) {
             callMap.get(callMap.keyAt(i))?.cancel()
+        }
+    }
+
+    /**
+     * 使用协程形式的get请求，使用runblocking，也可以使用suspend修饰
+     */
+    fun get(params: Map<String, Any>, urlStr: String) = runBlocking {
+        val urlBuilder = urlStr.toHttpUrl().newBuilder()
+        params.forEach { entry ->
+            urlBuilder.addEncodedQueryParameter(entry.key, entry.value.toString())
+        }
+
+        val request = Request.Builder()
+            .get()
+            .tag(params)
+            .url(urlBuilder.build())
+            .cacheControl(CacheControl.FORCE_NETWORK)
+            .build()
+        val newCall = mClient.newCall(request)
+
+        //存储请求，用户取消
+        callMap.put(request.tag(), newCall)
+        newCall.call()
+    }
+
+    /**
+     * 自定义扩展函数，扩展okhttp的call的异步执行方式，结合协程，返回dataresult的数据响应
+     */
+    private suspend fun Call.call(async: Boolean = true): Response {
+        return suspendCancellableCoroutine { continuation ->
+            if (async) {
+                enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        //避免不必要的冗余调用
+                        if (continuation.isCancelled) return
+                        continuation.resumeWithException(e)
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        continuation.resume(response)
+                    }
+                })
+            } else {
+                continuation.resume(execute())
+            }
+            continuation.invokeOnCancellation {
+                try {
+                    cancel()
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+            }
         }
     }
 }
