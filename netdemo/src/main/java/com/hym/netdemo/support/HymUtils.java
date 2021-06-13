@@ -25,7 +25,7 @@ public class HymUtils {
     /**
      * 中文转unicode
      */
-    public static String unicodeEncode(String str){
+    public static String unicodeEncode(String str) {
         String result = "";
         for (int i = 0; i < str.length(); i++) {
             int chr1 = (char) str.charAt(i);
@@ -57,7 +57,7 @@ public class HymUtils {
     /**
      * unicode 转中文
      */
-    public static String unicodeDecode(String str){
+    public static String unicodeDecode(String str) {
         StringBuilder string = new StringBuilder();
 
         String[] hex = str.split("\\\\u");
@@ -99,19 +99,21 @@ public class HymUtils {
 
     /**
      * 解析返回的data数据
+     *
      * @param dataStr 需要解析的数据
      * @return 返回解析完的数据
      */
     @Nullable
-    public static String decodeData(@Nullable String dataStr){
+    public static String decodeData(@Nullable String dataStr) {
         //java 代码，无自动null判断，需要自行处理
         if (dataStr != null) {
             return new String(EncryptUtils.decryptBase64AES(
-                    dataStr.getBytes(), HymConfigKt.NET_CONFIG_APPID.getBytes(),
-                    "AES/CBC/PKCS7Padding",
-                    "J#y9sJesy*5HmqLq".getBytes()
+                    dataStr.getBytes(),
+                    HymConfigKt.ENT_CONFIG_APPKEY.getBytes(),
+                    "AES/CBC/PKCS7Padding",   //解密的参数
+                    "J#y9sJesv*5HmqLq".getBytes()   //解密
             ));
-        }else {
+        } else {
             return null;
         }
     }
