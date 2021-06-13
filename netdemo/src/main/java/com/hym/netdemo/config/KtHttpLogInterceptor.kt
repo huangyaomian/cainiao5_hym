@@ -3,6 +3,7 @@ package com.hym.netdemo.config
 import android.util.Log
 import com.hym.netdemo.support.HymUtils
 import okhttp3.*
+import okio.Buffer
 import java.net.URLDecoder
 import java.text.SimpleDateFormat
 import java.util.*
@@ -91,7 +92,11 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
         logHeadersReq(sb, request, connection)
 //        LogUtils.d("mika test ${request.body.toString()}")
 //        LogUtils.d("mika test2 ${request}")
-        sb.appendLine("请求 RequestBody:${request.body.toString()}")
+        //读取出request Body的内容
+        val req = request.newBuilder().build()
+        val sink = Buffer()
+        req.body?.writeTo(sink)
+        sb.appendLine("请求 RequestBody: ${sink.readUtf8()}")
     }
 
     /**
@@ -119,7 +124,7 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
      */
     private fun logResponse(response:Response){
         val sb = StringBuilder();
-        sb.appendLine("->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->")
+        sb.appendLine("<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<")
         when (logLevel) {
             LogLevel.NONE -> {
 //                do nothing
@@ -143,7 +148,7 @@ class KtHttpLogInterceptor(block: (KtHttpLogInterceptor.() -> Unit)? = null) : I
 
         }
 
-        sb.appendLine("->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->")
+        sb.appendLine("<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<")
 
         logIt(sb, ColorLevel.INFO)
     }
