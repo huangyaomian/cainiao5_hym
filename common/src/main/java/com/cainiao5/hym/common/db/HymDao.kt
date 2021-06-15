@@ -32,4 +32,28 @@ interface UserDao{
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(user: DbUser)//更新，若出现冲突，则使用替换策略，还有其他策略可以选择
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertJUser(user:JUser)
+
+    /**
+     * 查询表tb_juser的数据,返回集合
+     * */
+    @Query("select * from tb_juser")
+    fun queryJuser(): List<JUser>
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    fun insertBook(book: Book)
+
+    /**
+     *  表tb_juser插入实体对象JUser
+     * */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertJuser(user: JUser)
+
+    @Query("select * from book")
+    fun getBook():List<Book>
+
+    @Query(value = "select * from tempBean")
+    fun queryUserBook():List<TempBean?>?
+
 }

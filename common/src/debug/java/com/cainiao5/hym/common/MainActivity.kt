@@ -5,9 +5,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.cainiao5.hym.common.db.DbUser
-import com.cainiao5.hym.common.db.UserDao
-import com.cainiao5.hym.common.db.UserDatabase
+import com.cainiao5.hym.common.db.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     fun insert(view: View?) {
         val sb = StringBuilder()
+        val users = arrayListOf<DbUser>()
         var user: DbUser
         for (i in 0..4) {
             user = DbUser()
@@ -41,9 +40,15 @@ class MainActivity : AppCompatActivity() {
             user.city = "北京 $i"
             user.name = "小明 $i"
             user.isSingle = i % 2 == 0
-            userDao!!.insertAll(user)
+            userDao?.insertBook(Book(i,"红楼梦 $i", 78.0 + i))
+            users.add(user)
             sb.appendLine(user.toString())
         }
+
+        userDao?.insertJUser(JUser(30))
+
+        val rowIds = userDao?.insertAll(*(users.toTypedArray()))
+        sb.append("rawId = ${rowIds.toString()}")
         tvInsert.text = sb.toString()
         getAll()
     }
@@ -56,11 +61,20 @@ class MainActivity : AppCompatActivity() {
                 .append("姓名： ${user?.name}")
                 .append("年龄： ${user?.age}")
                 .append("城市： ${user?.city}")
+                .append("body： ${user?.body.toString()}")
+                .append("书籍： ${user?.bookId.toString()}")
                 .append("single： ${user?.isSingle}")
                 .append("\n")
         }
         val text = "All Size: ${all.size}"
         tvSize.text = text
+        userDao?.queryJuser()?.apply {
+            sb.appendLine("JUser num $size ${joinToString { it.toString() }}")
+        }
+
+        userDao?.queryUserBook()?.apply {
+            sb.appendLine("book num $size ${joinToString { it.toString() }}")
+        }
         tvAll.text = sb.toString()
     }
 

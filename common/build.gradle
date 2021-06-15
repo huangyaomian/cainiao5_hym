@@ -13,6 +13,13 @@ android {
         if (singleModule.toBoolean()){
             applicationId "com.cainiao5.hym.common"
         }
+        //生成schema文件，便于查看数据库创建表的详细信息
+        kapt {
+            arguments {
+//                arg("AROUTER_MODULE_NAME", project.getName())
+                arg("room.schemaLocation": "$projectDir/schemas".toString())
+            }
+        }
     }
 
 }
