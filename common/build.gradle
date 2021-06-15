@@ -1,25 +1,9 @@
-//根据是否独立运行，将模块作为apk还是module
-if (singleModule.toBoolean()){
-    apply plugin: 'com.android.application'
-}else {
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.android.library'
 apply from: '../dependencies.gradle'
 
 android {
     // from dependencies.gradle
     defaultConfig{
-        //只有独立运行时候才需要applicaitonid
-        if (singleModule.toBoolean()){
-            applicationId "com.cainiao5.hym.common"
-        }
-        //生成schema文件，便于查看数据库创建表的详细信息
-        kapt {
-            arguments {
-//                arg("AROUTER_MODULE_NAME", project.getName())
-                arg("room.schemaLocation": "$projectDir/schemas".toString())
-            }
-        }
     }
 
 }
@@ -35,5 +19,23 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
     //endregion
+
+    //Androidx Jetpack最新的startUp组件
+    api('androidx.startup:startup-runtime:1.0.0')
+
+
+    //glide
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //coil
+    implementation("io.coil-kt:coil:0.13.0")
+
+    //腾讯的key-value
+    implementation("com.tencent:mmkv-static:1.2.1")
+
+    implementation 'com.just.agentweb:agentweb-androidx:4.1.4' // (必选)
+//    implementation 'com.just.agentweb:filechooser-androidx:4.1.4'// (可选)
+//    implementation 'com.download.library:downloader-androidx:4.1.4'// (可选)
 
 }

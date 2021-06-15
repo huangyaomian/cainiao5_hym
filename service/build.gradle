@@ -3,8 +3,13 @@ apply from: '../dependencies.gradle'
 
 android {
     // from dependencies.gradle
+    defaultConfig{
+
+    }
+
 }
 
 dependencies {
     // from dependencies.gradle
+    api project(path:':common')
 }
