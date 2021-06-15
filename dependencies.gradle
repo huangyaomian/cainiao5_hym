@@ -123,4 +123,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //endregion
 
+    //region Koin for AndroidX
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-fragment:$koin_version"
+    implementation "org.koin:koin-androidx-ext:$koin_version"
+
+    testImplementation "org.koin:koin-test:$koin_version"
+    //endregion
+
 }
