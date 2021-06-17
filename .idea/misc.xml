@@ -3,8 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_course.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/ic_home.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/ic_mine.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/ic_study.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1203125" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1203125" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1203125" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1203125" />
         <entry key="common/src/debug/res/layout/activity_main.xml" value="0.2625" />
+        <entry key="common/src/main/res/layout/activity_main.xml" value="0.37604166666666666" />
+        <entry key="course/src/main/res/layout/fragment_course.xml" value="0.1203125" />
+        <entry key="home/src/main/res/layout/fragment_home.xml" value="0.1203125" />
+        <entry key="login/src/main/res/layout/fragment_login.xml" value="0.1203125" />
+        <entry key="mine/src/main/res/layout/fragment_mine.xml" value="0.1203125" />
         <entry key="netdemo/src/main/res/layout/activity_main.xml" value="0.14322916666666666" />
+        <entry key="study/src/main/res/layout/fragment_study.xml" value="0.1203125" />
       </map>
     </option>
   </component>

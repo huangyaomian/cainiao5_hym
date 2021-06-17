@@ -64,31 +64,6 @@ class MainActivity : AppCompatActivity() {
             })
         //endregion
 
-
-/*        val loginBody = LoginReq()
-        httpApi.post(
-            loginBody,
-            "https://course.api.cniao5.com/accounts/course/10301/login",
-            object : IHttpCallback {
-                override fun onSuccess(data: Any?) {
-                    LogUtils.d("success result: ${data.toString()}")
-                    runOnUiThread {
-                        val toString = data.toString()
-                        val (code, dataObj, message) = GsonUtils.fromJson<NetResponse>(
-                            toString,
-                            NetResponse::class.java
-                        )
-                        tvHello.text = HymUtils.decodeData(data.toString())
-                    }
-                }
-
-                override fun onFailed(error: Any?) {
-                    LogUtils.d("failed msg: ${error.toString()}")
-                }
-            })
-
-        SystemClock.sleep(200)
-//        httpApi.cancelRequest(loginBody)*/
     }
 
 

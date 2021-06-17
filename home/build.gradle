@@ -8,4 +8,5 @@ android {
 
 dependencies {
     // from dependencies.gradle
+    implementation project(path: ':service')
 }
