@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph_main"
-    app:startDestination="@+id/homeFragment">
+    app:startDestination="@+id/mineFragment">
     <!--默认启动显示第一个fragment：homeFragment-->
 
     <fragment
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/mineFragment"
-        android:name="com.cainiao5.hym.mine.MIneFragment"
+        android:name="com.cainiao5.hym.mine.MineFragment"
         android:label="MineFragment"
         tools:layout="@layout/fragment_mine" />
 

@@ -1,6 +1,7 @@
 package com.cainiao5.hym.common
 
 import android.app.Application
+import com.blankj.utilcode.util.LogUtils
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -19,5 +20,23 @@ abstract class BaseApplicaition : Application() {
 
             androidContext(this@BaseApplicaition)
         }
+
+        initConfig()
+        initData()
+        LogUtils.d("BaseApplication onCreate")
+    }
+
+    /**
+     * 子类实现必要的配置初始化
+     */
+    open fun initConfig() {
+        LogUtils.d("${this.javaClass.simpleName} 初始化 initConfig")
+    }
+
+    /**
+     * 子类实现必要的数据初始化
+     */
+    open fun initData() {
+        LogUtils.d("${this.javaClass.simpleName} 初始化 initData")
     }
 }

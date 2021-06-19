@@ -14,8 +14,11 @@ import com.cainiao5.hym.home.databinding.FragmentHomeBinding
 class HomeFragment : BaseFragment() {
 
     override fun bindView(view: View, savedInstanceState: Bundle?): ViewDataBinding {
+//        view.setTag(R.layout.fragment_home,"home")
         return FragmentHomeBinding.bind(view)
     }
 
     override fun getLayoutRes(): Int = R.layout.fragment_home
+
+
 }

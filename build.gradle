@@ -1,9 +1,10 @@
 apply plugin: 'koin' //添加koin注入框架
 apply plugin: 'com.alibaba.arouter' //添加arouter 插件
+apply plugin: 'com.didi.dokit' //应用dokit插件
 
 buildscript {
     ext {
-        kotlin_version = '1.4.32'
+        kotlin_version = '1.5.10'
         compile_sdk_version = 30
         build_tools_version = '30.0.3'
         min_sdk_version = 21
@@ -15,6 +16,8 @@ buildscript {
         navigation_version = '2.3.1' //navigation 版本号，需要在dependencies和classpath保持一致
 
         koin_version = '2.2.3'//koin依赖注入框架
+
+        dokit_version = '3.4.0-alpha04'
     }
     repositories {
         google()
@@ -30,6 +33,9 @@ buildscript {
 
         //添加阿里 Arouter插件
         classpath "com.alibaba:arouter-register:1.0.2"
+
+        //添加dokit插件
+        classpath "io.github.didi.dokit:dokitx-plugin:$dokit_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

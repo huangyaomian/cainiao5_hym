@@ -1,9 +1,8 @@
-package com.cainiao5.hym.mine
-
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import com.cainiao5.hym.common.base.BaseFragment
+import com.cainiao5.hym.mine.R
 import com.cainiao5.hym.mine.databinding.FragmentMineBinding
 
 /**
@@ -11,7 +10,7 @@ import com.cainiao5.hym.mine.databinding.FragmentMineBinding
  * created on: 2021/6/17 8:03 上午
  * description:mine fragment
  */
-class MIneFragment : BaseFragment(){
+class MineFragment : BaseFragment(){
     override fun bindView(view: View, savedInstanceState: Bundle?): ViewDataBinding {
         return FragmentMineBinding.bind(view)
     }

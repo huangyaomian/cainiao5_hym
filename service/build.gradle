@@ -12,4 +12,8 @@ android {
 dependencies {
     // from dependencies.gradle
     api project(path:':common')
+    //region kit 调试助手工具
+    debugImplementation "io.github.didi.dokit:dokitx:$dokit_version"
+    releaseImplementation "io.github.didi.dokit:dokitx-no-op:$dokit_version"
+    //region
 }

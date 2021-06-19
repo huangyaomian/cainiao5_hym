@@ -38,9 +38,9 @@ abstract class BaseFragment : Fragment {//Fragment()表示主构造函数
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return inflater.inflate(getLayoutRes(),container,false)
     }
-
+    //ViewDataBinding 就是UI的具体viewDataBinding对象
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = bindView(view, savedInstanceState)

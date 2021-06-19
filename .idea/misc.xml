@@ -13,11 +13,13 @@
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1203125" />
         <entry key="common/src/debug/res/layout/activity_main.xml" value="0.2625" />
         <entry key="common/src/main/res/layout/activity_main.xml" value="0.37604166666666666" />
-        <entry key="course/src/main/res/layout/fragment_course.xml" value="0.1203125" />
+        <entry key="course/src/main/res/layout/fragment_course.xml" value="0.375" />
         <entry key="home/src/main/res/layout/fragment_home.xml" value="0.1203125" />
         <entry key="login/src/main/res/layout/fragment_login.xml" value="0.1203125" />
-        <entry key="mine/src/main/res/layout/fragment_mine.xml" value="0.1203125" />
+        <entry key="mine/src/main/res/layout/fragment_mine.xml" value="0.375" />
         <entry key="netdemo/src/main/res/layout/activity_main.xml" value="0.14322916666666666" />
+        <entry key="service/src/main/res/drawable/icon_account.xml" value="0.22864583333333333" />
+        <entry key="service/src/main/res/drawable/icon_server_host.xml" value="0.22864583333333333" />
         <entry key="study/src/main/res/layout/fragment_study.xml" value="0.1203125" />
       </map>
     </option>
