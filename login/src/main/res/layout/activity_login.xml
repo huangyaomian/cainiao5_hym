@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.cainiao5.hym.login.LoginViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/mtoolbar_login"
+            android:minHeight="?android:actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_title"
+                android:layout_gravity="center"
+                android:text="@string/login_title"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryText"/>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/iv_logo_login"
+            android:layout_marginTop="40dp"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@mipmap/ic_launcher_round"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mtoolbar_login"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_phone_tip_login"
+            android:gravity="center"
+            android:text="手机号："
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/til_phone_login"
+            app:layout_constraintTop_toTopOf="@id/til_phone_login"
+            app:layout_constraintStart_toStartOf="@id/til_phone_login"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/til_phone_login"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="20dp"
+            android:paddingStart="55dp"
+            app:boxBackgroundColor="@color/colorWindowBackGround"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo_login">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tiet_phone_login"
+                android:inputType="number"
+                android:maxLength="11"
+                android:lines="1"
+                android:text="@={vm.obMobile}"
+                tools:text="123"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_pwd_tip_login"
+            android:gravity="center"
+            android:text="密码："
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/til_pwd_login"
+            app:layout_constraintTop_toTopOf="@id/til_pwd_login"
+            app:layout_constraintStart_toStartOf="@id/til_pwd_login"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/til_pwd_login"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="20dp"
+            android:paddingStart="55dp"
+            app:boxBackgroundColor="@color/colorWindowBackGround"
+            app:layout_constraintTop_toBottomOf="@id/til_phone_login">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tiet_pwd_login"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:lines="1"
+                android:text="@={vm.obPassword}"
+                tools:text="12334567"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/btn_login"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="登 陆"
+            android:onClick="@{() -> vm.goLogin()}"
+            android:clickable="@{vm.obMobile.length() > 8 &amp;&amp; vm.obPassword.length() > 8}"
+            android:enabled="@{vm.obMobile.length() > 0 &amp;&amp; vm.obPassword.length() > 0}"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            app:cornerRadius="20dp"
+            app:layout_constraintTop_toBottomOf="@id/til_pwd_login"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_register_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:text="注册新账号"
+            android:textColor="#0971fe"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_forget_pwd_login"
+            android:layout_marginEnd="10dp"
+            android:onClick="@{vm::clickForgetPWD}"
+            android:text="忘记密码"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_register_login"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_third_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:text="快捷登录方式"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_register_login" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_wechat_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="@{() -> vm.clickWechat(context)}"
+            android:src="@drawable/ic_wechat"
+            app:layout_constraintEnd_toStartOf="@id/iv_qq_login"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_third_login" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_qq_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="@{(v) -> vm.clickQQ(v)}"
+            android:src="@drawable/ic_qq"
+            app:layout_constraintBottom_toBottomOf="@id/iv_wechat_login"
+            app:layout_constraintEnd_toStartOf="@id/iv_weibo_login"
+            app:layout_constraintStart_toEndOf="@id/iv_wechat_login" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_weibo_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v) -> vm.clickWeibo()}"
+            android:src="@drawable/ic_weibo"
+            app:layout_constraintBottom_toBottomOf="@id/iv_wechat_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_qq_login" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

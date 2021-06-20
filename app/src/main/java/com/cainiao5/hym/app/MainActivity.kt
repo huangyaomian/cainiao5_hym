@@ -1,6 +1,5 @@
 package com.cainiao5.hym.app
 
-import MineFragment
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -79,7 +78,7 @@ class MainViewPagerAdapter(fragmentActivity: FragmentActivity,
     }
 
     override fun createFragment(position: Int): Fragment {
-        return fragments[position] ?.invoke()?:  throw IndexOutOfBoundsException("ViewPager接收参数index越界啦!")
+        return fragments[position]?.invoke() ?:  throw IndexOutOfBoundsException("ViewPager接收参数index越界啦!")
     }
 
 }

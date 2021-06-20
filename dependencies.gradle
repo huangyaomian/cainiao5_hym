@@ -68,6 +68,7 @@ android {
     // work-runtime-ktx 2.1.0 and above now requires Java 8
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn",] // 添加@OptIn(ExperimentalContracts::class) 注解参数
     }
 
 }
