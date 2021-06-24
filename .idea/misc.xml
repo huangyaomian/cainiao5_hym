@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_course.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_mine.xml" value="0.13645833333333332" />
@@ -16,9 +17,31 @@
         <entry key="common/src/main/res/layout/activity_main.xml" value="0.37604166666666666" />
         <entry key="course/src/main/res/layout/fragment_course.xml" value="0.375" />
         <entry key="home/src/main/res/layout/fragment_home.xml" value="0.1203125" />
+        <entry key="login/src/debug/res/layout/activity_login.xml" value="0.18931159420289856" />
         <entry key="login/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="login/src/main/res/layout/fragment_login.xml" value="0.1203125" />
-        <entry key="mine/src/main/res/layout/fragment_mine.xml" value="0.375" />
+        <entry key="mine/src/debug/res/drawable/ic_gift_card.xml" value="0.25416666666666665" />
+        <entry key="mine/src/debug/res/drawable/ic_gift_share.xml" value="0.25416666666666665" />
+        <entry key="mine/src/debug/res/layout/activity_login.xml" value="0.18931159420289856" />
+        <entry key="mine/src/debug/res/layout/activity_mine.xml" value="0.1157548125633232" />
+        <entry key="mine/src/debug/res/layout/v_item_setting.xml" value="0.18931159420289856" />
+        <entry key="mine/src/main/res/drawable/ic_gift_card.xml" value="0.25416666666666665" />
+        <entry key="mine/src/main/res/drawable/ic_gift_share.xml" value="0.25416666666666665" />
+        <entry key="mine/src/main/res/drawable/ic_like_it.xml" value="0.25416666666666665" />
+        <entry key="mine/src/main/res/drawable/ic_shoping.xml" value="0.25416666666666665" />
+        <entry key="mine/src/main/res/drawable/ic_shopping.xml" value="0.25416666666666665" />
+        <entry key="mine/src/main/res/drawable/ic_warning.xml" value="0.25416666666666665" />
+        <entry key="mine/src/main/res/drawable/icon_coupon.xml" value="0.25416666666666665" />
+        <entry key="mine/src/main/res/drawable/icon_default_header.xml" value="0.25416666666666665" />
+        <entry key="mine/src/main/res/drawable/icon_money.xml" value="0.25416666666666665" />
+        <entry key="mine/src/main/res/drawable/shape_info_bg.xml" value="0.25416666666666665" />
+        <entry key="mine/src/main/res/layout/activity_mine.xml" value="0.1" />
+        <entry key="mine/src/main/res/layout/fragment_container_mine.xml" value="0.1743659420289855" />
+        <entry key="mine/src/main/res/layout/fragment_mine.xml" value="0.36527777777777776" />
+        <entry key="mine/src/main/res/layout/fragment_user_info.xml" value="0.1743659420289855" />
+        <entry key="mine/src/main/res/layout/v_item_setting.xml" value="0.25" />
+        <entry key="mine/src/main/res/layout/v_item_settings.xml" value="0.1" />
+        <entry key="mine/src/main/res/layout/v_items_setting.xml" value="0.1" />
         <entry key="netdemo/src/main/res/layout/activity_main.xml" value="0.14322916666666666" />
         <entry key="service/src/main/res/drawable/ic_back.xml" value="0.3921875" />
         <entry key="service/src/main/res/drawable/ic_right.xml" value="0.3921875" />

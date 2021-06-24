@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+
+        <variable
+            name="userInfo"
+            type="com.cainiao5.hym.mine.net.UserInfoRsp" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_user_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?colorPrimary"
+            android:gravity="center"
+            android:minHeight="?android:actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back_white">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="个人信息"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <View
+            android:id="@+id/v_bg_user_info"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/shape_info_bg"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_user_info" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_icon_user_info"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_default_header"
+            app:layout_constraintBottom_toBottomOf="@id/v_bg_user_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/v_bg_user_info"
+            app:layout_constraintVertical_bias="0.4"
+            app:shapeAppearanceOverlay="@style/circleImageStyle"
+            app:srcCompat="@{userInfo.logo_url}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_edit_icon_user_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="点击更换头像"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_icon_user_info" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_item_user_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="1dp"
+            app:contentPadding="20dp"
+            app:layout_constraintTop_toBottomOf="@id/v_bg_user_info">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_pre_uname_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="用户名:"
+                    android:textColor="@color/colorPrimaryText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_uname_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@{userInfo.username??`NameOfNull`}"
+                    android:textColor="@color/colorSecondaryText"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tv_pre_uname_user_info"
+                    app:layout_constraintStart_toEndOf="@id/tv_pre_uname_user_info"
+                    tools:text="剑来" />
+
+                <View
+                    android:id="@+id/v_div_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorDivider"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pre_uname_user_info" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_pre_company_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="就职公司:"
+                    android:textColor="@color/colorPrimaryText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v_div_1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_company_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userInfo.company??`ComOfNull`}"
+                    android:textColor="@color/colorSecondaryText"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tv_pre_company_user_info"
+                    app:layout_constraintStart_toStartOf="@id/tv_uname_user_info"
+                    tools:text="菜鸟窝教育机构" />
+
+                <View
+                    android:id="@+id/v_div_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorDivider"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pre_company_user_info" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_pre_position_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="职位:"
+                    android:textColor="@color/colorPrimaryText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v_div_2" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_position_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userInfo.job??`JobOfNull`}"
+                    android:textColor="@color/colorSecondaryText"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tv_pre_position_user_info"
+                    app:layout_constraintStart_toStartOf="@id/tv_uname_user_info"
+                    tools:text="Android工程师" />
+
+                <View
+                    android:id="@+id/v_div_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorDivider"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pre_position_user_info" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_pre_experience_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="工作年限:"
+                    android:textColor="@color/colorPrimaryText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v_div_3" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_experience_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userInfo.work_years??`workYearNull`}"
+                    android:textColor="@color/colorSecondaryText"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tv_pre_experience_user_info"
+                    app:layout_constraintStart_toStartOf="@id/tv_uname_user_info"
+                    tools:text="1年" />
+
+                <View
+                    android:id="@+id/v_div_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorDivider"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pre_experience_user_info" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_pre_description_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="个人介绍:"
+                    android:textColor="@color/colorPrimaryText"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v_div_4" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_description_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userInfo.desc??`DescNull`}"
+                    android:textColor="@color/colorSecondaryText"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tv_pre_description_user_info"
+                    app:layout_constraintStart_toStartOf="@id/tv_uname_user_info"
+                    tools:text="描述的什么内容呢" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_save_user_info"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:text="保存"
+            app:cornerRadius="20dp"
+            app:layout_constraintTop_toBottomOf="@id/cv_item_user_info" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

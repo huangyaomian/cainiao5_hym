@@ -16,3 +16,5 @@ const val ENT_CONFIG_APPKEY="J#y9sJesv*5HmqLqEV1yUPYfpH\$pHx\$!"//appkey用户�
 const val SP_KEY_USER_TOKEN="sp_key_user_token" //用户token标记
 
 //endregion
+
+const val  BASE_HOST="https://course.api.cniao5.com/"

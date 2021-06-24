@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
  * created on: 2021/6/12 10:48 下午
  * description:封装的retrofit请求类
  */
-object KtRestrofit {
+object KtRetrofit {
 
     private val mOkClient = OkHttpClient.Builder()
         .callTimeout(10, TimeUnit.SECONDS)//完整请求超时时长，从发起到接收返回数据，默认值0，不限定
@@ -41,7 +41,7 @@ object KtRestrofit {
      * 初始化配置
      * [baseUrl] 项目接口的基类url，以/结尾
      */
-    fun initConfig(baseUrl: String, okClient: OkHttpClient = mOkClient): KtRestrofit {
+    fun initConfig(baseUrl: String, okClient: OkHttpClient = mOkClient): KtRetrofit {
         retrofit = retrofitBUilder.baseUrl(baseUrl).client(okClient).build()
         return this
     }

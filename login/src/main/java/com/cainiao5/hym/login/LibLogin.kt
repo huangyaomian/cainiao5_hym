@@ -1,6 +1,6 @@
 package com.cainiao5.hym.login
 
-import com.cainiao5.hym.common.network.KtRestrofit
+import com.cainiao5.hym.common.network.KtRetrofit
 import com.cainiao5.hym.login.net.LoginService
 import com.cainiao5.hym.login.repo.ILoginResource
 import com.cainiao5.hym.login.repo.LoginRepo
@@ -17,7 +17,7 @@ val moduleLogin = module {
 
     //service retrofit
     single {
-        KtRestrofit.initConfig("https://course.api.cniao5.com/")
+        KtRetrofit.initConfig("https://course.api.cniao5.com/")
             .getService(LoginService ::class.java)
     }
     //repo LoginResource

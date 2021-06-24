@@ -1,6 +1,7 @@
 package com.cainiao5.hym.app
 
 import android.widget.Toast
+import androidx.collection.arrayMapOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -11,6 +12,7 @@ import com.cainiao5.hym.common.widget.BnvMediator
 import com.cainiao5.hym.course.CourseFragment
 import com.cainiao5.hym.home.HomeFragment
 import com.cainiao5.hym.study.StudyFragment
+import com.cniao5.mine.MineContainerFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -21,11 +23,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         const val INDEX_MINE = 3 //我的fg对应的索引位置
     }
 
-    private val fragments = mapOf<Int, ReFragment>(
+    private val fragments = arrayMapOf<Int, ReFragment>(
         INDEX_HOME to { HomeFragment() },
         INDEX_COURSE to { CourseFragment() },
         INDEX_STUDY to { StudyFragment() },
-        INDEX_MINE to { MineFragment() },
+        INDEX_MINE to { MineContainerFragment() },
 
     )
 

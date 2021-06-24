@@ -1,71 +1,74 @@
 //统一配置一些共用参数
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt' //kotlin语言使用注入框架，databinding都需要这个
-apply plugin: 'androidx.navigation.safeargs.kotlin' //用于navigation传参的时候一种安全防护
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-kapt'//kotlin语言使用注入框架，dataBinding都需要这个
+apply plugin: 'androidx.navigation.safeargs.kotlin'//用于navigation传参的时候一种安全防护,非空，类型判断等。
+
 
 
 android {
-    compileSdkVersion compile_sdk_version
-    buildToolsVersion build_tools_version
+    compileSdkVersion compile_sdk_version //30
+    buildToolsVersion build_tools_version  //"30.0.2"
+
 
     defaultConfig {
-        minSdkVersion min_sdk_version
-        targetSdkVersion target_sdk_version
-        versionCode lib_version_code
-        versionName lib_version_name
+        minSdkVersion min_sdk_version  //23
+        targetSdkVersion target_sdk_version //30
+        versionCode lib_version_code //1
+        versionName lib_version_name //1.0.0
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+
+
+        //Java配置方式: room 的scheme文件生成位置配置，便于查看数据库创建表的详细信息; ARouter的配置
+        javaCompileOptions{
+            annotationProcessorOptions{
+                //room 的scheme文件生成位置配置
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+
+                // ARouter的配置
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+
+        //kotlin配置方式:  room 的scheme文件生成位置配置  ;   ARouter 的配置
+        kapt{
+            arguments{
+                arg("AROUTER_MODULE_NAME", project.getName())
+                arg("room.schemaLocation": "$projectDir/schemas".toString())
+            }
+        }
+
+
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
-    //kotlin配置方式:  room 的scheme文件生成位置配置  ;   ARouter 的配置
-    kapt{
-        arguments{
-            arg("AROUTER_MODULE_NAME", project.getName())
-            arg("room.schemaLocation": "$projectDir/schemas".toString())
-        }
-    }
-    /*//共用配置，主要针对其他module，作为独立模块运行的时候，它需要一个启动Activity的主入口配置
-    sourceSets {
-        //默认没有配置flavors的情况，只有main主体渠道 分类debug 和release 两种favorites
-        //如果该module作为独立app运行，使用的配置
-        debug {
-            if (singleModule.toBoolean()) {
-                manifest.srcFile 'src/debug/AndroidManifest.xml'
-                //同理，可配置res.srcDirs之类的
-            } else {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            }
-        }
 
-        release {
-            //作为module的时候，就不需要debug包下的文件，排除掉
-            java {
-                exclude 'src/debug/**'
-            }
-        }
-    }
-    */
+    //AndroidStudio 4 以下使用这种方式配置dataBinding
+//    dataBinding {
+//        isEnabled = true
+//    }
 
-
+    //AS4 以上版本使用这个配置dataBinding
     buildFeatures {
-        viewBinding true
-        dataBinding true
+        dataBinding = true
     }
+
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility  JavaVersion.VERSION_1_8
+        targetCompatibility  JavaVersion.VERSION_1_8
     }
 
-    // work-runtime-ktx 2.1.0 and above now requires Java 8
+
+    //使用jetpack的组件，会要求jdk 1.8最好，有的时候会遇到报错，需要配置如下，避免target jvm 1.8的那个报错
     kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn",] // 添加@OptIn(ExperimentalContracts::class) 注解参数
@@ -124,7 +127,7 @@ dependencies {
 
     //ARouter
     implementation 'com.alibaba:arouter-api:1.5.0'
-    kapt 'com.alibaba:arouter-compiler:1.2.2'
+    kapt 'com.alibaba:arouter-compiler:1.5.2'
     //liveData eventBus
     implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
 
@@ -139,21 +142,17 @@ dependencies {
 
     //region Koin for AndroidX
     // Koin for Kotlin
-    implementation "io.insert-koin:koin-core:$koin_version"
-    implementation "io.insert-koin:koin-core-ext:$koin_version"
+    // Koin for Kotlin
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-core-ext:$koin_version"
 
-    // Koin AndroidX Scope features
-    implementation "io.insert-koin:koin-androidx-scope:$koin_version"
-    // Koin AndroidX ViewModel features
-    implementation "io.insert-koin:koin-androidx-viewmodel:$koin_version"
-    // Koin AndroidX Fragment features
-    implementation "io.insert-koin:koin-androidx-fragment:$koin_version"
-    // Koin AndroidX WorkManager
-    implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
-    // Koin AndroidX Experimental features
-    implementation "io.insert-koin:koin-androidx-ext:$koin_version"
-    // Koin for Ktor Kotlin
-    implementation "io.insert-koin:koin-ktor:$koin_version"
+    // Koin for AndroidX
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-fragment:$koin_version"
+    implementation "org.koin:koin-androidx-ext:$koin_version"
+
+    testImplementation "org.koin:koin-test:$koin_version"
     //endregion
 
 

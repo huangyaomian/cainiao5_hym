@@ -7,24 +7,31 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-/**
- * author: huangyaomian
- * created on: 2021/6/20 11:05 上午
- * description:viewmodel的公共基础类
- */
-abstract class BaseViewModel : ViewModel() {
-    private val jobs = mutableListOf<Job>()
 
-    val isLoading = MutableLiveData<Boolean>()//标记网络loading状态
+/**
+ *
+ * viewModel的公共基类
+ *
+ * */
+abstract  class BaseViewModel: ViewModel() {
+
+   private  val jobs = mutableListOf<Job>()
+   val isLoading = MutableLiveData<Boolean>() //标记网络loading状态
+
+
 
     /**
      * 协程 网络请求
      */
-    protected fun serverAwait(block:suspend CoroutineScope.() -> Unit) = viewModelScope.launch {
-        isLoading.value = true
+
+
+   protected  fun serverAwait(block:suspend CoroutineScope.() ->Unit)=viewModelScope.launch {
+        isLoading.value=true
         block.invoke(this)
-        isLoading.value = false
+        isLoading.value=false
     }.addTo(jobs)
+
+
 
 
     override fun onCleared() {
@@ -36,7 +43,24 @@ abstract class BaseViewModel : ViewModel() {
     /**
      * 扩展函数，用于viewModel中的job 添加到list方便
      */
-    private  fun  Job.addTo(list:MutableList<Job>){
+
+     private  fun  Job.addTo(list:MutableList<Job>){
         list.add(this)
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

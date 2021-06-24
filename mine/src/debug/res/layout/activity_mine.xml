@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="bean"
+            type="androidx.databinding.ObservableField&lt;com.cainiao5.hym.mine.widget.ItemSettingsBean>" />
+    </data>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.cainiao5.hym.mine.widget.ItemSettingsView
+        android:id="@+id/isv_card"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:arrow="@{bean.arrowRes}"
+        app:arrowColor="@{bean.arrowColor}"
+        app:icon="@{bean.iconRes}"
+        app:iconColor="@{bean.iconColor}"
+        app:title="@{bean.title}"
+        app:titleColor="@{bean.titleColor}"
+        app:desc="@{bean.desc}"
+        app:descColor="@{bean.descColor}"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

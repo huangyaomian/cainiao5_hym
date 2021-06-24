@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_mine.xml"
+    app:startDestination="@id/mineFragment">
+
+    <fragment
+        android:id="@+id/mineFragment"
+        android:name="com.cainiao5.hym.mine.ui.MineFragment"
+        android:label="MineFragment"
+        tools:layout="@layout/fragment_mine">
+<!--MineFragment的点击头像的 action 的操作行为 : 跳转到UserInfoFragment界面 -->
+        <action
+            android:id="@+id/action_mineFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.cainiao5.hym.mine.ui.UserInfoFragment"
+        android:label="UserInfoFragment"
+        tools:layout="@layout/fragment_user_info">
+
+        <!-- 由我的MineFragment 跳转到用户信息界面UserInfoFragment 携带的参数数据UserInfoRsp -->
+        <argument
+            android:name="userInfo"
+            app:argType="com.cainiao5.hym.mine.net.UserInfoRsp" />
+    </fragment>
+
+</navigation>

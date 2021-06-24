@@ -13,21 +13,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.blankj.utilcode.util.LogUtils
 
+
 /**
- * author: huangyaomian
- * created on: 2021/6/16 9:00 下午
- * description:fragment的抽象基类
- */
-abstract class BaseFragment : Fragment {//Fragment()表示主构造函数
+ *Fragment的抽象基类
+ * */
+abstract  class BaseFragment: Fragment { //Fragment()表示主构造函数
+
 
     constructor() : super()
-    constructor(@LayoutRes contentLayoutId : Int) : super(contentLayoutId)
+    constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
 
-    var mActivity : AppCompatActivity? = null
-
-    //ViewDataBinding 就是UI的具体viewDataBinding对象
-    private var mBinding : ViewDataBinding? = null
-
+     var mActivity: AppCompatActivity? = null
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mActivity = context as AppCompatActivity
@@ -38,28 +34,23 @@ abstract class BaseFragment : Fragment {//Fragment()表示主构造函数
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(getLayoutRes(),container,false)
+        return inflater.inflate(getLayoutRes(), container, false)
     }
-    //ViewDataBinding 就是UI的具体viewDataBinding对象
+//ViewDataBinding 就是UI的具体viewDataBinding对象
+  private var mBinding: ViewDataBinding?=null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mBinding = bindView(view, savedInstanceState)
-        mBinding?.lifecycleOwner = viewLifecycleOwner
+          mBinding= bindView(view, savedInstanceState)
+          mBinding?.lifecycleOwner=viewLifecycleOwner
 
         initConfig()
         initData()
     }
 
-    /**
-     * databingd绑定view
-     */
-    abstract fun bindView(view : View, savedInstanceState: Bundle?) : ViewDataBinding
+    abstract fun bindView(view: View, savedInstanceState: Bundle?):ViewDataBinding
 
-    /**
-     * 设置layout布局文件
-     */
     @LayoutRes
-    abstract fun getLayoutRes() : Int
+    abstract fun getLayoutRes(): Int
 
     /**
      * view初始化后的必要配置
@@ -76,16 +67,23 @@ abstract class BaseFragment : Fragment {//Fragment()表示主构造函数
     }
 
 
-    protected fun <T:Any> LiveData<T>.observerKt(block : (T?) -> Unit){
-        this.observe(viewLifecycleOwner, Observer { data ->
-            block(data)
-//            block.invoke(data)
-        })
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         mBinding?.unbind()
     }
+
+    /**
+     * 扩展liveData的observe函数
+     */
+
+    protected   fun <T:Any> LiveData<T>.observerKt(block: (T?) -> Unit){
+         this.observe(viewLifecycleOwner, Observer { data->
+               block(data)
+           //   block.invoke(data)
+         })
+    }
+
+
+
 
 }

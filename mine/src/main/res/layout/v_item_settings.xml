@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="info"
+            type="androidx.databinding.ObservableField&lt;com.cainiao5.hym.mine.widget.ItemSettingsBean>" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon_v_item_settings"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick='@{info.iconListener}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@{info.iconRes}"
+            app:tint="@{info.iconColor}"
+            tools:srcCompat="@drawable/ic_gift_card"
+            tools:tint="@color/colorPrimary" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title_v_item_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:onClick="@{info.titleListener}"
+            android:text="@{info.title}"
+            android:textColor="@{info.titleColor}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_icon_v_item_settings"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="学习卡 免费领"
+            tools:textColor="@color/colorPrimaryText" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_desc_v_item_settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical|end"
+            android:maxLines="2"
+            android:onClick="@{info.descListener}"
+            android:text="@{info.desc}"
+            android:textColor="@{info.descColor}"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_right_v_item_settings"
+            app:layout_constraintStart_toEndOf="@id/tv_title_v_item_settings"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="123可以免费领取学习卡可以免费领取学习卡可以免费领取学习卡可以免费领取学习卡可以免费领取学习卡可以免费领取学习卡可以免费领取学习卡可以免费领取学习卡可以免费领取学习卡可以免费领取学习卡可以免费领取学习卡可以免费领取学习卡"
+            tools:textColor="@color/colorSecondaryText" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_right_v_item_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{info.arrowListener}"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@{info.arrowRes}"
+            app:tint="@{info.arrowColor}"
+            tools:srcCompat="@drawable/ic_right"
+            tools:tint="@color/colorSecondaryText" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

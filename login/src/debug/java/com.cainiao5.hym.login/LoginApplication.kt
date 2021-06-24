@@ -10,7 +10,6 @@ import org.koin.core.context.loadKoinModules
  * description:
  */
 class LoginApplication: BaseApplicaition() {
-
     override fun initConfig() {
         super.initConfig()
         loadKoinModules(moduleService)

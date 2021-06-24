@@ -1,13 +1,13 @@
-apply plugin: 'koin' //添加koin注入框架
 apply plugin: 'com.alibaba.arouter' //添加arouter 插件
-apply plugin: 'com.didi.dokit' //应用dokit插件
+apply plugin: 'koin' //添加koin注入框架
+apply plugin: 'com.didi.dokit' //添加滴滴 dokit 插件
 
 buildscript {
     ext {
-        kotlin_version = '1.5.10'
+        kotlin_version = '1.4.32'
         compile_sdk_version = 30
         build_tools_version = '30.0.3'
-        min_sdk_version = 21
+        min_sdk_version = 23
         target_sdk_version = 30
 
         lib_version_code = 1
@@ -15,7 +15,7 @@ buildscript {
 
         navigation_version = '2.3.1' //navigation 版本号，需要在dependencies和classpath保持一致
 
-        koin_version = '2.2.3'//koin依赖注入框架
+        koin_version = '2.2.2'//koin依赖注入框架
 
         dokit_version = '3.4.0-alpha04'
     }
